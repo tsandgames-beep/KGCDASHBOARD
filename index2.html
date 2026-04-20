@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGC 브랜드전략실 - 3월 4주차 대시보드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --kgc-red: #A6192E;
+            --kgc-gold: #C5A059;
+        }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
+        .bg-kgc-red { background-color: var(--kgc-red); }
+        .text-kgc-red { color: var(--kgc-red); }
+        .border-kgc-red { border-color: var(--kgc-red); }
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-slate-800 flex items-center gap-3">
+                <span class="bg-kgc-red text-white p-2 rounded-lg"><i class="fa-solid fa-chart-line"></i></span>
+                에브리타임 밸런스 마케팅 대시보드
+            </h1>
+            <p class="text-slate-500 mt-1">2026년 3월 4주차 | 리뉴얼 제품 판매 현황 분석</p>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="window.print()" class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50 shadow-sm">
+                <i class="fa-solid fa-download mr-2"></i>보고서 내보내기
+            </button>
+            <div class="px-4 py-2 bg-kgc-red text-white rounded-lg text-sm font-medium shadow-md">
+                팀장: 인선미 (Brand Strategy)
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- KPI Cards -->
+        <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <p class="text-sm text-slate-500 mb-1">수도권 판매량</p>
+            <h3 class="text-2xl font-bold text-kgc-red">+15.0%</h3>
+            <p class="text-xs text-green-500 mt-2"><i class="fa-solid fa-arrow-up"></i> 전주 대비 강세</p>
+        </div>
+        <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <p class="text-sm text-slate-500 mb-1">핵심 타겟층(2030)</p>
+            <h3 class="text-2xl font-bold text-slate-800">45.0%</h3>
+            <p class="text-xs text-slate-400 mt-2">사회초년생 구매 비중</p>
+        </div>
+        <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <p class="text-sm text-slate-500 mb-1">스포츠 키워드 언급</p>
+            <h3 class="text-2xl font-bold text-blue-600">+30%</h3>
+            <p class="text-xs text-blue-400 mt-2">등산/테니스 중심 급증</p>
+        </div>
+        <div class="card bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <p class="text-sm text-slate-500 mb-1">긍정 리뷰 비율</p>
+            <h3 class="text-2xl font-bold text-slate-800">82.4%</h3>
+            <p class="text-xs text-slate-400 mt-2">패키지/맛 만족도 상승</p>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h4 class="font-bold text-slate-800 mb-4">지역별 판매 성장률 (%)</h4>
+            <canvas id="regionChart" height="200"></canvas>
+        </div>
+
+        <div class="md:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h4 class="font-bold text-slate-800 mb-4">소비자 연령대 분포</h4>
+            <canvas id="ageChart" height="200"></canvas>
+        </div>
+
+        <!-- Feedback & Insights -->
+        <div class="md:col-span-3 space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-kgc-red"></i> 실시간 고객 VOC 분석
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-green-50 rounded-xl border border-green-100">
+                        <span class="text-xs font-bold text-green-600 uppercase">Positive</span>
+                        <p class="text-sm text-slate-700 mt-2">"포장이 세련되어 선물용으로 최고입니다."</p>
+                        <p class="text-sm text-slate-700 mt-1">"기존 홍삼보다 쓴맛이 덜해서 먹기 편해요."</p>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-100">
+                        <span class="text-xs font-bold text-red-600 uppercase">Improvement</span>
+                        <p class="text-sm text-slate-700 mt-2">"리뉴얼 후 가격이 조금 오른 것 같아요."</p>
+                        <p class="text-sm text-slate-700 mt-1 text-red-500 font-medium">"박스 개봉 시 가끔 뻑뻑함이 느껴집니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 p-6 rounded-2xl shadow-lg text-white">
+                <h4 class="font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-yellow-400"></i> 팀장 전략 제언 (Action Items)
+                </h4>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <span class="bg-slate-700 p-1 rounded">01</span>
+                        <span><strong>아웃도어 마케팅:</strong> 테니스/등산 커뮤니티 연계 '오운완' 캠페인 즉시 실행</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="bg-slate-700 p-1 rounded">02</span>
+                        <span><strong>채널 최적화:</strong> 지방권 대형마트 '가족 건강 키트' 번들 기획 구성</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="bg-slate-700 p-1 rounded">03</span>
+                        <span><strong>품질 개선:</strong> 패키지 개봉 편의성(Easy-off) 관련 생산 파트 피드백 전달</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar / Trend -->
+        <div class="md:col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h4 class="font-bold text-slate-800 mb-4">트렌드 키워드</h4>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">#사회초년생</span>
+                <span class="px-3 py-1 bg-blue-100 rounded-full text-xs font-medium text-blue-600">#테니스</span>
+                <span class="px-3 py-1 bg-green-100 rounded-full text-xs font-medium text-green-600">#오운완</span>
+                <span class="px-3 py-1 bg-red-100 rounded-full text-xs font-medium text-red-600">#선물추천</span>
+                <span class="px-3 py-1 bg-orange-100 rounded-full text-xs font-medium text-orange-600">#등산</span>
+                <span class="px-3 py-1 bg-purple-100 rounded-full text-xs font-medium text-purple-600">#에너지부스터</span>
+            </div>
+            <div class="mt-8">
+                <h5 class="text-xs font-bold text-slate-400 uppercase mb-3">Today's Summary</h5>
+                <p class="text-sm text-slate-600 leading-relaxed italic">
+                    "2030 라이프스타일 깊숙이 침투하는 것이 이번 리뉴얼의 핵심입니다. 단순 건강기능식품을 넘어 패션과 스포츠의 영역으로 확장합시다."
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Region Sales Chart
+        const ctxRegion = document.getElementById('regionChart').getContext('2d');
+        new Chart(ctxRegion, {
+            type: 'bar',
+            data: {
+                labels: ['수도권 (편의점)', '지방 (대형마트)'],
+                datasets: [{
+                    label: '전주 대비 성장률 (%)',
+                    data: [15, -2],
+                    backgroundColor: ['rgba(166, 25, 46, 0.8)', 'rgba(100, 116, 139, 0.5)'],
+                    borderRadius: 8,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // Age Demographics Chart
+        const ctxAge = document.getElementById('ageChart').getContext('2d');
+        new Chart(ctxAge, {
+            type: 'doughnut',
+            data: {
+                labels: ['2030 사회초년생', '4050 부모세대', '기타'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: ['#A6192E', '#C5A059', '#cbd5e1'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
